@@ -1,5 +1,11 @@
 VALID_CHOICES = %w(rock paper scissors lizard spock)
 
+WINNERS = { rock:     %w(lizard scissors),
+            paper:    %w(rock spock),
+            scissors: %w(paper lizard),
+            lizard:   %w(paper spock),
+            spock:    %w(scissors rock) }
+
 player_score = 0
 computer_score = 0
 
@@ -8,17 +14,11 @@ def prompt(message)
 end
 
 def display_results(player, computer)
-  winners = { rock:     %w(lizard scissors),
-              paper:    %w(rock spock),
-              scissors: %w(paper lizard),
-              lizard:   %w(paper spock),
-              spock:    %w(scissors rock) }
-
   prompt("You chose #{player}; computer chose #{computer}")
 
-  if winners[player.to_sym].include?(computer)
+  if WINNERS[player.to_sym].include?(computer)
     prompt("You won!")
-  elsif winners[computer.to_sym].include?(player)
+  elsif WINNERS[computer.to_sym].include?(player)
     prompt("Computer won!")
   else
     prompt("It's a tie!")
@@ -31,8 +31,22 @@ prompt("First to five games wins.")
 loop do
   choice = ''
   loop do
-    prompt("Choose one: #{VALID_CHOICES.join(', ')}")
-    choice = gets.chomp
+    prompt("Choose one: rock (r), paper (p),\
+ scissors (sc), lizard (l), spock (sp)open")
+    choice = gets.chomp.downcase
+
+    choice = case choice
+             when 'r'
+               'rock'
+             when 'p'
+               'paper'
+             when 'sc'
+               'scissors'
+             when 'l'
+               'lizard'
+             when 'sp'
+               'spock'
+             end
 
     if VALID_CHOICES.include?(choice)
       break
@@ -45,9 +59,9 @@ loop do
 
   display_results(choice, computer_choice)
 
-  if winners[choice.to_sym].include?(computer_choice)
+  if WINNERS[choice.to_sym].include?(computer_choice)
     player_score += 1
-  elsif winners[computer_choice.to_sym].include?(choice)
+  elsif WINNERS[computer_choice.to_sym].include?(choice)
     computer_score += 1
   end
 
