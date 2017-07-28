@@ -1,0 +1,5 @@
+flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
+
+flintstones.push('Dino', 'Hoppy')
+
+# solution: flinstones.push('Dino').push('Hoppy')
