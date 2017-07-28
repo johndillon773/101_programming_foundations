@@ -1,11 +1,5 @@
 VALID_CHOICES = %w(rock paper scissors lizard spock)
 
-winners = { rock:     %w(lizard scissors),
-            paper:    %w(rock spock),
-            scissors: %w(paper lizard),
-            lizard:   %w(paper spock),
-            spock:    %w(scissors rock) }
-
 player_score = 0
 computer_score = 0
 
